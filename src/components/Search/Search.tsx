@@ -1,22 +1,18 @@
 "use client";
 
-import React, { JSX, useState } from "react";
+import React, { JSX } from "react";
 
-type Props = object;
+interface Props {
+  search: string | undefined;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const Search: React.FC<Props> = (): JSX.Element => {
-  const [search, setSearch] = useState<string>("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-
-    console.log(e);
-  };
-
-  const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log("clicked", search);
-  };
-
+const Search: React.FC<Props> = ({
+  onClick,
+  search,
+  handleChange,
+}): JSX.Element => {
   return (
     <div>
       <input value={search} onChange={(e) => handleChange(e)}></input>
