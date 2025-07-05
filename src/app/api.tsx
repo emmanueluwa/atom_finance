@@ -1,26 +1,23 @@
 import axios from "axios";
-import { CompanySearch } from "./utils/company";
 import { isAxiosError } from "axios";
+import { CompanySearch } from "./utils/company";
 
-interface SearchResponse {
-  data: CompanySearch[];
-}
-
-export const searchCompanies = async (query: string) => {
-  console.log(query);
+export const searchCompanies = async (
+  query: string
+): Promise<CompanySearch[] | string> => {
   try {
-    const data = await axios.get<SearchResponse>(
-      `https://financialmodelingprep.com/stable/search-symbol?query=AAPL&apikey=${process.env.FMP_API_KEY}`
+    const response = await axios.get<CompanySearch[]>(
+      `https://financialmodelingprep.com/stable/search-symbol?query=${query}&apikey=${process.env.NEXT_PUBLIC_FMP_API_KEY}`
     );
 
-    return data;
+    return response.data;
   } catch (error) {
-    if (error instanceof isAxiosError) {
-      console.log("error message: ", error);
-      return error;
+    if (isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
     } else {
       console.log("unexpected error: ", error);
-      return "Unexpected error occured";
+      return "Unexpected error occurred";
     }
   }
 };
