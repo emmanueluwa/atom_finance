@@ -1,23 +1,24 @@
 "use client";
 
-import React, { JSX } from "react";
+import React, { JSX, SyntheticEvent } from "react";
 
 interface Props {
   search: string | undefined;
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchSubmit: (e: SyntheticEvent) => void;
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Search: React.FC<Props> = ({
-  onClick,
+  onSearchSubmit,
   search,
-  handleChange,
+  handleSearchChange,
 }): JSX.Element => {
   return (
-    <div>
-      <input value={search} onChange={(e) => handleChange(e)}></input>
-      <button onClick={(e) => onClick(e)}>click me!</button>
-    </div>
+    <>
+      <form onSubmit={onSearchSubmit}>
+        <input value={search} onChange={handleSearchChange} />
+      </form>
+    </>
   );
 };
 

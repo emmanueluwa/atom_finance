@@ -2,7 +2,7 @@
 
 import CardList from "@/components/CardList/CardList";
 import Search from "@/components/Search/Search";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { CompanySearch } from "./utils/company";
 import { searchCompanies } from "./api";
 
@@ -12,13 +12,17 @@ export default function Home() {
 
   const [serverError, setServerError] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const onClick = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const onPortfolioCreate = (e: SyntheticEvent) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
+  const onSearchSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
     const result = await searchCompanies(search);
 
     if (typeof result === "string") {
@@ -33,9 +37,16 @@ export default function Home() {
   };
   return (
     <div>
-      <Search onClick={onClick} search={search} handleChange={handleChange} />
+      <Search
+        onSearchSubmit={onSearchSubmit}
+        search={search}
+        handleSearchChange={handleSearchChange}
+      />
       {serverError && <div>{serverError}</div>}
-      <CardList searchResults={searchResults} />
+      <CardList
+        searchResults={searchResults}
+        onPortfolioCreate={onPortfolioCreate}
+      />
     </div>
   );
 }
