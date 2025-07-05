@@ -32,6 +32,18 @@ export default function Home() {
     setPortfolioValues(updatedPorfolio);
   };
 
+  const onPortfolioDelete = (e: SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    const value = (target[0] as HTMLInputElement).value;
+
+    const updatedPortfolio = portfolioValues.filter((val) => {
+      return val !== value;
+    });
+
+    setPortfolioValues(updatedPortfolio);
+  };
+
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const result = await searchCompanies(search);
@@ -53,7 +65,10 @@ export default function Home() {
         search={search}
         handleSearchChange={handleSearchChange}
       />
-      <PortfolioList portfolioValues={portfolioValues} />
+      <PortfolioList
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
       {serverError && <div>{serverError}</div>}
       <CardList
         searchResults={searchResults}
