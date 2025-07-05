@@ -5,10 +5,13 @@ import Search from "@/components/Search/Search";
 import { SyntheticEvent, useState } from "react";
 import { CompanySearch } from "./utils/company";
 import { searchCompanies } from "./api";
+import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<CompanySearch[]>([]);
+
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
 
   const [serverError, setServerError] = useState<string>("");
 
@@ -18,7 +21,15 @@ export default function Home() {
 
   const onPortfolioCreate = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(e);
+    const target = e.target as HTMLFormElement;
+    const value = (target[0] as HTMLInputElement).value;
+
+    const exists = portfolioValues.find((val) => val === value);
+    if (exists) return;
+
+    //new array created for react to trigger render
+    const updatedPorfolio = [...portfolioValues, value];
+    setPortfolioValues(updatedPorfolio);
   };
 
   const onSearchSubmit = async (e: SyntheticEvent) => {
@@ -42,6 +53,7 @@ export default function Home() {
         search={search}
         handleSearchChange={handleSearchChange}
       />
+      <PortfolioList portfolioValues={portfolioValues} />
       {serverError && <div>{serverError}</div>}
       <CardList
         searchResults={searchResults}
