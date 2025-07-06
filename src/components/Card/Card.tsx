@@ -2,6 +2,7 @@ import React, { JSX, SyntheticEvent } from "react";
 import "./Card.css";
 import { CompanySearch } from "@/app/utils/company";
 import AddPortfolio from "../Portfolio/AddPorfolio/AddPortfolio";
+import Link from "next/link";
 // import Image from "next/image";
 
 interface Props {
@@ -21,9 +22,12 @@ const Card: React.FC<Props> = ({
       key={id}
       id={id}
     >
-      <h2 className="font-bold text-center text-gray-900 md:text-left">
+      <Link
+        href={`/company/${searchResult.symbol}`}
+        className="font-bold text-center text-gray-900 md:text-left"
+      >
         {searchResult.name} ({searchResult.symbol})
-      </h2>
+      </Link>
       <p className="text-gray-900">{searchResult.currency}</p>
       <p className="font-bold text-gray-900">
         {searchResult.exchangeShortName} - {searchResult.stockExchange}

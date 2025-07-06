@@ -1,6 +1,6 @@
 import axios from "axios";
 import { isAxiosError } from "axios";
-import { CompanySearch } from "./utils/company";
+import { CompanySearch } from "../company";
 
 export const searchCompanies = async (
   query: string
