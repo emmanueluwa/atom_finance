@@ -51,11 +51,7 @@ const Page = () => {
       setServerError(result);
     } else {
       setSearchResults(result);
-      console.log("got here");
     }
-    console.log("result:", result);
-
-    console.log(e);
   };
   return (
     <>
