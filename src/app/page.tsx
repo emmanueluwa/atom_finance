@@ -6,6 +6,8 @@ import { SyntheticEvent, useState } from "react";
 import { CompanySearch } from "./utils/company";
 import { searchCompanies } from "./api";
 import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
+import Navbar from "@/components/Navbar/Navbar";
+// import Hero from "@/components/Hero/Hero";
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
@@ -60,6 +62,8 @@ export default function Home() {
   };
   return (
     <div>
+      <Navbar />
+      {/* <Hero /> */}
       <Search
         onSearchSubmit={onSearchSubmit}
         search={search}
