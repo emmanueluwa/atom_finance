@@ -1,6 +1,7 @@
 "use client";
 import { CompanyCashFlowAsReported } from "@/app/utils/company";
 import { getCashflowStatement } from "@/app/utils/services/api";
+import Spinner from "@/components/Spinner/Spinner";
 import Table from "@/components/Table/Table";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -210,13 +211,7 @@ const Page = () => {
   }
 
   return (
-    <>
-      {cashflow ? (
-        <Table config={config} data={cashflow} />
-      ) : (
-        <h1>No results.</h1>
-      )}
-    </>
+    <>{cashflow ? <Table config={config} data={cashflow} /> : <Spinner />}</>
   );
 };
 

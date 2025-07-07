@@ -2,6 +2,7 @@
 import { CompanyBalanceSheet } from "@/app/utils/company";
 import { getBalanceSheet } from "@/app/utils/services/api";
 import RatioList from "@/components/RatioList/RatioList";
+import Spinner from "@/components/Spinner/Spinner";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -88,7 +89,7 @@ const Page = () => {
       {balanceSheet ? (
         <RatioList config={config} data={balanceSheet} />
       ) : (
-        <h1>Company not found!</h1>
+        <Spinner />
       )}
     </>
   );

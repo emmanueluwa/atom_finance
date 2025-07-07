@@ -2,6 +2,7 @@
 import { CompanyKeyMetrics } from "@/app/utils/company";
 import { getKeyMetrics } from "@/app/utils/services/api";
 import RatioList from "@/components/RatioList/RatioList";
+import Spinner from "@/components/Spinner/Spinner";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -98,7 +99,7 @@ const Page = () => {
           <RatioList data={companyData} config={tableConfig} />
         </>
       ) : (
-        <div>Loading...</div>
+        <Spinner />
       )}
     </>
   );

@@ -2,6 +2,7 @@
 
 import { FinancialEstimate } from "@/app/utils/company";
 import { getFinancialEstimates } from "@/app/utils/services/api";
+import Spinner from "@/components/Spinner/Spinner";
 import Table from "@/components/Table/Table";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -120,7 +121,7 @@ const Page = () => {
       {incomeStatement ? (
         <Table config={configs} data={incomeStatement} />
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </div>
   );
