@@ -1,6 +1,7 @@
 import axios from "axios";
 import { isAxiosError } from "axios";
 import {
+  CompanyBalanceSheet,
   CompanyIncomeStatement,
   CompanyKeyMetrics,
   CompanyProfile,
@@ -75,7 +76,7 @@ export const getIncomeStatement = async (query: string) => {
   if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
     try {
       const data = await axios.get<CompanyIncomeStatement[]>(
-        `https://financialmodelingprep.com/stable/income-statement-ttm?symbol=${query}?limit=${LIMIT}&apikey=${FM_API_KEY}`
+        `https://financialmodelingprep.com/stable/income-statement-ttm?symbol=${query}&limit=${LIMIT}&apikey=${FM_API_KEY}`
       );
 
       return data;
@@ -93,14 +94,14 @@ export const getIncomeStatement = async (query: string) => {
   }
 };
 
+const ESTIMATES_LIMIT = 1;
+
 export const getFinancialEstimates = async (query: string) => {
   if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
     try {
       const data = await axios.get<FinancialEstimate[]>(
-        `https://financialmodelingprep.com/stable/analyst-estimates?symbol=${query}&period=annual&page=0&limit=10&apikey=${FM_API_KEY}`
+        `https://financialmodelingprep.com/stable/analyst-estimates?symbol=${query}&period=annual&page=0&limit=${ESTIMATES_LIMIT}&apikey=${FM_API_KEY}`
       );
-
-      console.log("financial estimates:", data);
 
       return data;
     } catch (error) {
@@ -110,6 +111,32 @@ export const getFinancialEstimates = async (query: string) => {
       } else {
         console.log("unexpected error: ", error);
         return "Unexpected error occurred";
+      }
+    }
+  } else {
+    return "Please choose from free tier list";
+  }
+};
+
+const BALANCE_SHEET_LIMIT = 1;
+
+export const getBalanceSheet = async (query: string) => {
+  if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
+    try {
+      const data = await axios.get<CompanyBalanceSheet[]>(
+        `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&&limit=${BALANCE_SHEET_LIMIT}&apikey=${FM_API_KEY}`
+      );
+
+      console.log("balance sheet:", data);
+
+      return data;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        console.log("error message: ", error.message);
+        return error.message;
+      } else {
+        console.log("unexpected error: ", error);
+        return "Unexpected error occured";
       }
     }
   } else {
