@@ -1,6 +1,13 @@
 import axios from "axios";
 import { isAxiosError } from "axios";
-import { CompanyKeyMetrics, CompanyProfile, CompanySearch } from "../company";
+import {
+  CompanyIncomeStatement,
+  CompanyKeyMetrics,
+  CompanyProfile,
+  CompanySearch,
+  FinancialEstimate,
+} from "../company";
+import { FREE_TIER_SYMBOL_LIMIT } from "../constants";
 
 const FM_API_KEY = process.env.NEXT_PUBLIC_FMP_API_KEY;
 
@@ -39,7 +46,7 @@ export const getCompanyProfile = async (query: string) => {
       return error.message;
     } else {
       console.log("unexpected error: ", error);
-      return "Unexpected error occured";
+      return "Unexpected error occurred";
     }
   }
 };
@@ -57,7 +64,55 @@ export const getKeyMetrics = async (query: string) => {
       return error.message;
     } else {
       console.log("unexpected error: ", error);
-      return "Unexpected error occured";
+      return "Unexpected error occurred";
     }
+  }
+};
+
+const LIMIT = 1;
+
+export const getIncomeStatement = async (query: string) => {
+  if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
+    try {
+      const data = await axios.get<CompanyIncomeStatement[]>(
+        `https://financialmodelingprep.com/stable/income-statement-ttm?symbol=${query}?limit=${LIMIT}&apikey=${FM_API_KEY}`
+      );
+
+      return data;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        console.log("error message: ", error.message);
+        return error.message;
+      } else {
+        console.log("unexpected error: ", error);
+        return "Unexpected error occurred";
+      }
+    }
+  } else {
+    return "Choose From Free Tier List";
+  }
+};
+
+export const getFinancialEstimates = async (query: string) => {
+  if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
+    try {
+      const data = await axios.get<FinancialEstimate[]>(
+        `https://financialmodelingprep.com/stable/analyst-estimates?symbol=${query}&period=annual&page=0&limit=10&apikey=${FM_API_KEY}`
+      );
+
+      console.log("financial estimates:", data);
+
+      return data;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        console.log("error message: ", error.message);
+        return error.message;
+      } else {
+        console.log("unexpected error: ", error);
+        return "Unexpected error occurred";
+      }
+    }
+  } else {
+    return "Please choose from free tier list";
   }
 };

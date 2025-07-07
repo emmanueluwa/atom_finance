@@ -3,8 +3,8 @@ import CardList from "@/components/CardList/CardList";
 import Search from "@/components/Search/Search";
 import { SyntheticEvent, useState } from "react";
 import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
-import { CompanySearch } from "../utils/company";
 import { searchCompanies } from "../utils/services/api";
+import { CompanySearch } from "../utils/company";
 
 const Page = () => {
   const [search, setSearch] = useState<string>("");

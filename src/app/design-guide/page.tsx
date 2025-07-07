@@ -1,8 +1,8 @@
 // import RatioList from "@/components/RatioList/RatioList";
-import Table from "@/components/Table/Table";
+// import Table from "@/components/Table/Table";
 import React from "react";
-// import { CompanyKeyMetrics } from "../utils/company";
 // import { testIncomeStatementData } from "@/components/Table/testData";
+// import { CompanyKeyMetrics } from "../utils/company";
 
 // const tableConfig = [
 //   {
@@ -16,8 +16,8 @@ const Page = () => {
   return (
     <>
       <h1>Atom Finance Design Guide</h1>
-      {/* <RatioList data={testIncomeStatementData} config={tableConfig} /> */}
-      <Table />
+      {/* <RatioList data={testIncomeStatementData} config={tableConfig} />
+      <Table data={testIncomeStatementData} config={tableConfig} /> */}
       <h2>
         This the design page. This is where all the design aspects of the app
         can be found.

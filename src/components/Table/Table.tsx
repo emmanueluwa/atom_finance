@@ -1,36 +1,33 @@
 import React from "react";
-import { testIncomeStatementData } from "./testData";
 import { v4 as uuidv4 } from "uuid";
+import { FinancialEstimate } from "@/app/utils/company";
 
-const data = testIncomeStatementData;
-
-type Company = (typeof data)[0];
 type ConfigItem = {
   label: string;
-  render: (company: Company) => string | number;
+  render: (company: FinancialEstimate) => string | number;
 };
 
-const configs: ConfigItem[] = [
-  {
-    label: "Year",
-    render: (company: Company) => company.acceptedDate,
-  },
-  {
-    label: "Cost of Revenue",
-    render: (company: Company) => company.costOfRevenue,
-  },
-];
+interface Props {
+  config: (
+    | {
+        label: string;
+        render: (company: FinancialEstimate) => string;
+      }
+    | {
+        label: string;
+        render: (company: FinancialEstimate) => number;
+      }
+  )[];
+  data: FinancialEstimate[];
+}
 
-const Table = () => {
+const Table = ({ config, data }: Props) => {
   const renderedRows = data.map((company) => {
     return (
       <tr key={uuidv4()}>
-        {configs.map((val: ConfigItem) => {
+        {config.map((val: ConfigItem) => {
           return (
-            <td
-              className="p-4 whitespace-nowrap text-sm font-normal text-gray-900"
-              key={uuidv4()}
-            >
+            <td className="p-3" key={uuidv4()}>
               {val.render(company)}
             </td>
           );
@@ -39,7 +36,7 @@ const Table = () => {
     );
   });
 
-  const renderedHeaders = configs.map((config: ConfigItem) => {
+  const renderedHeaders = config.map((config: ConfigItem) => {
     return (
       <th
         className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"

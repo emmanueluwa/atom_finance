@@ -22,11 +22,11 @@ const Sidebar = () => {
               <h6 className="ml-3">Company Profile</h6>
             </Link>
             <Link
-              href={`/company/${symbol}/income-statement`}
+              href={`/company/${symbol}/financial-estimate`}
               className="flex md:min-w-full text-gray-800 text-medium uppercase font-bold pt-1 pb-4 no-underline"
             >
               <FaHome />
-              <h6 className="ml-3">Income Statement</h6>
+              <h6 className="ml-3">Financial Estimate</h6>
             </Link>
           </div>
         </div>
