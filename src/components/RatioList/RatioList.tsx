@@ -1,29 +1,20 @@
+import { CompanyKeyMetrics } from "@/app/utils/company";
 import React from "react";
-import { TestDataCompany } from "../Table/testData";
 import { v4 as uuidv4 } from "uuid";
 
-type Props = {};
+type ConfigItem = {
+  label: string;
+  render: (data: CompanyKeyMetrics) => string | number | null | undefined;
+  subTitle?: string;
+};
 
-const data = TestDataCompany[0];
+type Props = {
+  config: ConfigItem[];
+  data: CompanyKeyMetrics;
+};
 
-type Company = typeof data;
-
-const config = [
-  {
-    label: "Company Name",
-    render: (company: Company) => company.companyName,
-    subTitle: "This is the company name",
-  },
-
-  {
-    label: "Company Name",
-    render: (company: Company) => company.companyName,
-    subTitle: "This is the company name",
-  },
-];
-
-const RatioList = (props: Props) => {
-  const renderedRows = config.map((row) => {
+const RatioList = ({ config, data }: Props) => {
+  const renderedRows = config.map((row: ConfigItem) => {
     return (
       <li className="py-3 sm:py-4" key={uuidv4()}>
         <div className="flex items-center space-x-4">
@@ -43,7 +34,7 @@ const RatioList = (props: Props) => {
     );
   });
   return (
-    <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
+    <div className="bg-white shadow rounded-lg ml-4mt-4 mb-4 p-4 sm:p-6 h-full">
       <ul className="divide-y divide-gray-200">{renderedRows}</ul>
     </div>
   );

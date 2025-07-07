@@ -1,6 +1,6 @@
 import axios from "axios";
 import { isAxiosError } from "axios";
-import { CompanyProfile, CompanySearch } from "../company";
+import { CompanyKeyMetrics, CompanyProfile, CompanySearch } from "../company";
 
 const FM_API_KEY = process.env.NEXT_PUBLIC_FMP_API_KEY;
 
@@ -31,6 +31,24 @@ export const getCompanyProfile = async (query: string) => {
     );
 
     console.log("company data:", data);
+
+    return data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "Unexpected error occured";
+    }
+  }
+};
+
+export const getKeyMetrics = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyKeyMetrics[]>(
+      `https://financialmodelingprep.com/stable/key-metrics-ttm?symbol=${query}&apikey=${FM_API_KEY}`
+    );
 
     return data;
   } catch (error) {
