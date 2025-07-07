@@ -203,6 +203,51 @@ export interface CompanyBalanceSheet {
   finalLink: string;
 }
 
+export interface CompanyCashFlowAsReported {
+  symbol: string;
+  fiscalYear: number;
+  period: string;
+  reportedCurrency: string | null;
+  date: string;
+  data: {
+    profitloss: number;
+    depreciationamortizationandimpairment: number;
+    sharebasedcompensation: number;
+    inventorywritedown: number;
+    foreigncurrencytransactiongainlossunrealized: number;
+    deferredincometaxexpensebenefit: number;
+    noncashinterestincomeexpenseandotheroperatingactivities: number;
+    gainlossondigitalassets: number;
+    increasedecreaseinaccountsreceivable: number;
+    increasedecreaseininventories: number;
+    increasedecreaseinoperatingleasevehicles: number;
+    increasedecreaseinprepaiddeferredexpenseandotherassets: number;
+    increasedecreaseinaccountspayableandaccruedliabilities: number;
+    increasedecreaseincontractwithcustomerliability: number;
+    netcashprovidedbyusedinoperatingactivities: number;
+    paymentstoacquirepropertyplantandequipment: number;
+    paymentsforsolarenergysystemsnetofsales: number;
+    paymentstoacquireinvestments: number;
+    proceedsfromsalematurityandcollectionsofinvestments: number;
+    proceedsfromsaleofshortterminvestments: number;
+    netcashprovidedbyusedininvestingactivities: number;
+    proceedsfromissuanceofdebt: number;
+    repaymentsofconvertibledebt: number;
+    proceedsfromissuanceofsharesunderincentiveandsharebasedcompensationplansincludingstockoptions: number;
+    financeleaseprincipalpayments: number;
+    paymentsofdebtissuancecosts: number;
+    paymentstominorityshareholders: number;
+    paymentsforbuyoutsofnoncontrollinginterestsinsubsidiaries: number;
+    netcashprovidedbyusedinfinancingactivities: number;
+    effectofexchangerateoncashcashequivalentsrestrictedcashandrestrictedcashequivalentsincludingdisposalgroupanddiscontinuedoperations: number;
+    cashcashequivalentsrestrictedcashandrestrictedcashequivalentsperiodincreasedecreaseincludingexchangerateeffect: number;
+    cashcashequivalentsrestrictedcashandrestrictedcashequivalentsincludingdisposalgroupanddiscontinuedoperations: number;
+    noncashorpartnoncashacquisitionvalueofassetsacquired1: number;
+    interestpaidnet: number;
+    incometaxespaid: number;
+  };
+}
+
 export interface CompanyCashFlow {
   date: string;
   symbol: string;

@@ -2,6 +2,7 @@ import axios from "axios";
 import { isAxiosError } from "axios";
 import {
   CompanyBalanceSheet,
+  CompanyCashFlowAsReported,
   CompanyIncomeStatement,
   CompanyKeyMetrics,
   CompanyProfile,
@@ -37,8 +38,6 @@ export const getCompanyProfile = async (query: string) => {
     const data = await axios.get<CompanyProfile[]>(
       `https://financialmodelingprep.com/stable/profile?symbol=${query}&apikey=${FM_API_KEY}`
     );
-
-    console.log("company data:", data);
 
     return data;
   } catch (error) {
@@ -124,11 +123,33 @@ export const getBalanceSheet = async (query: string) => {
   if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
     try {
       const data = await axios.get<CompanyBalanceSheet[]>(
-        `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&&limit=${BALANCE_SHEET_LIMIT}&apikey=${FM_API_KEY}`
+        `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&limit=${BALANCE_SHEET_LIMIT}&apikey=${FM_API_KEY}`
       );
 
-      console.log("balance sheet:", data);
+      return data;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        console.log("error message: ", error.message);
+        return error.message;
+      } else {
+        console.log("unexpected error: ", error);
+        return "Unexpected error occured";
+      }
+    }
+  } else {
+    return "Please choose from free tier list";
+  }
+};
 
+const CASHFLOW_LIMIT = 1;
+
+export const getCashflowStatement = async (query: string) => {
+  if (FREE_TIER_SYMBOL_LIMIT.includes(query.toUpperCase())) {
+    try {
+      const data = await axios.get<CompanyCashFlowAsReported[]>(`
+      https://financialmodelingprep.com/stable/cash-flow-statement-as-reported?symbol=${query}&limit=${CASHFLOW_LIMIT}&apikey=${FM_API_KEY}`);
+
+      console.log("cash flow", data);
       return data;
     } catch (error) {
       if (isAxiosError(error)) {

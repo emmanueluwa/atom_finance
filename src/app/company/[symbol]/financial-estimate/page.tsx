@@ -95,7 +95,9 @@ const Page = () => {
   const { symbol } = useParams();
   const [serverError, setServerError] = useState<string>("");
 
-  const [incomeStatement, setIncomeStatement] = useState<FinancialEstimate[]>();
+  const [incomeStatement, setIncomeStatement] = useState<FinancialEstimate[]>(
+    []
+  );
 
   useEffect(() => {
     const getIncomeStatementInit = async () => {
