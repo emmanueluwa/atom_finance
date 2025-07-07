@@ -7,6 +7,7 @@ import {
   CompanyKeyMetrics,
   CompanyProfile,
   CompanySearch,
+  CompanyTenK,
   FinancialEstimate,
 } from "../company";
 import { FREE_TIER_SYMBOL_LIMIT } from "../constants";
@@ -162,5 +163,25 @@ export const getCashflowStatement = async (query: string) => {
     }
   } else {
     return "Please choose from free tier list";
+  }
+};
+
+const K_LIMIT = 1;
+
+export const getTenK = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyTenK[]>(
+      `https://financialmodelingprep.com/stable/sec-filings-search/symbol?symbol=${query}&from=2024-01-01&to=2024-03-01&page=0&limit=${K_LIMIT}&apikey=${FM_API_KEY}`
+    );
+
+    return data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      return error.message;
+    } else {
+      console.log("unexpected error: ", error);
+      return "Unexpected error occured";
+    }
   }
 };

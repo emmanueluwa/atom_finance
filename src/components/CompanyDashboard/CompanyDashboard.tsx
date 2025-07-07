@@ -1,6 +1,7 @@
 import React from "react";
 import Tile from "../Tile/Tile";
 import { CompanyProfile } from "@/app/utils/company";
+import TenKFinder from "../TenKFinder/TenKFinder";
 
 interface Props {
   company: CompanyProfile;
@@ -17,6 +18,7 @@ const CompanyDashboard = ({ company }: Props) => {
               <Tile title="Price" subTitle={company.price.toString()} />
               <Tile title="Sector" subTitle={company.sector} />
               {/* <Tile title="DCF" subTitle={company.dcf.toString()} /> */}
+              <TenKFinder symbol={company.symbol} />
             </div>{" "}
             <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
               {company.description}
