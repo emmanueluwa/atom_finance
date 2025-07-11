@@ -1,6 +1,7 @@
 "use client";
-import { CompanyBalanceSheet } from "@/app/utils/company";
-import { getBalanceSheet } from "@/app/utils/services/api";
+import { CompanyBalanceSheet } from "@/utils/company";
+import { formatLargeMonetaryNumber } from "@/utils/helpers/NumberFormatting";
+import { getBalanceSheet } from "@/utils/services/api";
 import RatioList from "@/components/RatioList/RatioList";
 import Spinner from "@/components/Spinner/Spinner";
 import { useParams } from "next/navigation";
@@ -8,56 +9,69 @@ import React, { useEffect, useState } from "react";
 
 const config = [
   {
-    label: "Total Assets",
-    render: (company: CompanyBalanceSheet) => company.totalAssets,
+    label: <div className="font-bold">Total Assets</div>,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalAssets) ?? "N/A",
   },
   {
     label: "Current Assets",
-    render: (company: CompanyBalanceSheet) => company.totalCurrentAssets,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalCurrentAssets) ?? "N/A",
   },
   {
     label: "Total Cash",
-    render: (company: CompanyBalanceSheet) => company.cashAndCashEquivalents,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.cashAndCashEquivalents) ?? "N/A",
   },
   {
     label: "Property & equipment",
-    render: (company: CompanyBalanceSheet) => company.propertyPlantEquipmentNet,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.propertyPlantEquipmentNet) ?? "N/A",
   },
   {
     label: "Intangible Assets",
-    render: (company: CompanyBalanceSheet) => company.intangibleAssets,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.intangibleAssets) ?? "N/A",
   },
   {
     label: "Long Term Debt",
-    render: (company: CompanyBalanceSheet) => company.longTermDebt,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.longTermDebt) ?? "N/A",
   },
   {
     label: "Total Debt",
-    render: (company: CompanyBalanceSheet) => company.otherCurrentLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.otherCurrentLiabilities) ?? "N/A",
   },
   {
-    label: "Total Liabilites",
-    render: (company: CompanyBalanceSheet) => company.totalLiabilities,
+    label: <div className="font-bold">Total Liabilites</div>,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalLiabilities) ?? "N/A",
   },
   {
     label: "Current Liabilities",
-    render: (company: CompanyBalanceSheet) => company.totalCurrentLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalCurrentLiabilities) ?? "N/A",
   },
   {
     label: "Long-Term Debt",
-    render: (company: CompanyBalanceSheet) => company.longTermDebt,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.longTermDebt) ?? "N/A",
   },
   {
     label: "Long-Term Income Taxes",
-    render: (company: CompanyBalanceSheet) => company.otherLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.otherLiabilities) ?? "N/A",
   },
   {
     label: "Stakeholder's Equity",
-    render: (company: CompanyBalanceSheet) => company.totalStockholdersEquity,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalStockholdersEquity) ?? "N/A",
   },
   {
     label: "Retained Earnings",
-    render: (company: CompanyBalanceSheet) => company.retainedEarnings,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.retainedEarnings) ?? "N/A",
   },
 ];
 

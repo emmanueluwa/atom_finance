@@ -1,6 +1,6 @@
 "use client";
-import { CompanyCashFlowAsReported } from "@/app/utils/company";
-import { getCashflowStatement } from "@/app/utils/services/api";
+import { CompanyCashFlowAsReported } from "@/utils/company";
+import { getCashflowStatement } from "@/utils/services/api";
 import Spinner from "@/components/Spinner/Spinner";
 import Table from "@/components/Table/Table";
 import { useParams } from "next/navigation";

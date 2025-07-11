@@ -1,4 +1,4 @@
-import { CompanyTenK } from "@/app/utils/company";
+import { CompanyTenK } from "@/utils/company";
 import React from "react";
 
 interface Props {

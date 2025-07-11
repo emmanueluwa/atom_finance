@@ -1,6 +1,6 @@
 import React, { JSX, SyntheticEvent } from "react";
 import "./Card.css";
-import { CompanySearch } from "@/app/utils/company";
+import { CompanySearch } from "@/utils/company";
 import AddPortfolio from "../Portfolio/AddPorfolio/AddPortfolio";
 import Link from "next/link";
 // import Image from "next/image";

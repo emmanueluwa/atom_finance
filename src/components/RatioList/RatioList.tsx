@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 type ConfigItem<T> = {
-  label: string;
+  label: string | React.ReactNode;
   render: (data: T) => string | number | null | undefined;
   subTitle?: string;
 };

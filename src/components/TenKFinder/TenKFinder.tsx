@@ -1,5 +1,5 @@
-import { CompanyTenK } from "@/app/utils/company";
-import { getTenK } from "@/app/utils/services/api";
+import { CompanyTenK } from "@/utils/company";
+import { getTenK } from "@/utils/services/api";
 import React, { useEffect, useState } from "react";
 import TenKFinderItem from "./TenKFinderItem/TenKFinderItem";
 import Spinner from "../Spinner/Spinner";

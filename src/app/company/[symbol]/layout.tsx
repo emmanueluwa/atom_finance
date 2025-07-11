@@ -1,6 +1,6 @@
 "use client";
-import { CompanyProfile } from "@/app/utils/company";
-import { getCompanyProfile } from "@/app/utils/services/api";
+import { CompanyProfile } from "@/utils/company";
+import { getCompanyProfile } from "@/utils/services/api";
 import CompanyDashboard from "@/components/CompanyDashboard/CompanyDashboard";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Spinner from "@/components/Spinner/Spinner";
