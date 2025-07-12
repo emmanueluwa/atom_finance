@@ -1,4 +1,4 @@
-import { CommentPost } from "@/models/Comment";
+import { CommentGet, CommentPost } from "@/models/Comment";
 import { handleError } from "@/utils/helpers/ErrorHandler";
 import axios from "axios";
 
@@ -14,6 +14,16 @@ export const CommentPostApi = async (
       title: title,
       content: content,
     });
+
+    return data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const CommentGetApi = async (symbol: string) => {
+  try {
+    const data = await axios.get<CommentGet[]>(api + `?Symbol=${symbol}`);
 
     return data;
   } catch (error) {
