@@ -59,6 +59,7 @@ export const UserProvider = ({ children }: Props) => {
           };
 
           localStorage.setItem("user", JSON.stringify(userObject));
+          document.cookie = `token=${res?.data.token}; path=/; max-age=604800`;
 
           setToken(res?.data.token);
 
@@ -77,6 +78,7 @@ export const UserProvider = ({ children }: Props) => {
       .then((res) => {
         if (res) {
           localStorage.setItem("token", res?.data.token);
+          document.cookie = `token=${res?.data.token}; path=/; max-age=604800`;
 
           const userObject = {
             username: res?.data.username,
@@ -104,6 +106,7 @@ export const UserProvider = ({ children }: Props) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 
     setUser(null);
     setToken("");

@@ -19,13 +19,15 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden lg:flex items-center space-x-6 text-back">
-          <div className="hover:text-darkBlue">Login</div>
-          <a
-            href=""
+          <Link href="/login" className="hover:text-yellow-600">
+            Login
+          </Link>
+          <Link
+            href="/register"
             className="px-8 py-3 font-bold rounded text-white bg-black hover:opacity-70"
           >
             Signup
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
