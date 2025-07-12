@@ -1,3 +1,5 @@
+"use client";
+
 import { UserProfile } from "@/models/User";
 import { loginApi, registerApi } from "@/services/AuthService";
 import axios from "axios";
