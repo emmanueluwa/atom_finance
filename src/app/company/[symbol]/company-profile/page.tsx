@@ -9,6 +9,7 @@ import RatioList from "@/components/RatioList/RatioList";
 import Spinner from "@/components/Spinner/Spinner";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import StockComment from "@/components/StockComment/StockComment";
 
 const tableConfig = [
   {
@@ -84,6 +85,8 @@ const Page = () => {
   const [companyData, setCompanyData] = useState<CompanyKeyMetrics>();
   const [serverError, setServerError] = useState<string>("");
 
+  const symbolString = Array.isArray(symbol) ? symbol[0] : symbol;
+
   useEffect(() => {
     const getKeyMetricsInit = async () => {
       const value = await getKeyMetrics(symbol as string);
@@ -109,6 +112,7 @@ const Page = () => {
       {companyData ? (
         <>
           <RatioList data={companyData} config={tableConfig} />
+          <StockComment stockSymbol={symbolString} />
         </>
       ) : (
         <Spinner />
